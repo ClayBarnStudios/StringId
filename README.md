@@ -52,8 +52,6 @@ Console.WriteLine($"{a} -> {i_a}");
 
 #### Current Benchmarks:
 
-
-
 ##### Creation Benchmark
 
 ***Includes:***
@@ -76,6 +74,9 @@ Console.WriteLine($"{a} -> {i_a}");
 
 | Call Count + 1 | Result (Average of 10 attempts) |
 |----------------|---------------------------------|
-| 10k            | 3.6ms                           |
-| 100k           | 44.4ms                          |
-| 1m             | 390.3ms                         |
+| 10k            | <1ms                            |
+| 100k           | 3ms                             |
+| 1m             | 30.3ms                          |
+
+***For reference, it takes 2ms avg to compare 1 million `ulong` on my machine***
+***For reference, it takes 21ms avg to compare 1 million `string` on my machine***

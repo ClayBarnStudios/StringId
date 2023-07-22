@@ -136,7 +136,7 @@ public struct StringId : IFormattable, IComparable, IComparable<StringId>, IEqua
             case 45: _45 = value; break;
             case 46: _46 = value; break;
             case 47: _47 = value; break;
-                default: throw new ArgumentOutOfRangeException($"Expected an index between 0 and 47, found {index}");
+            default: throw new ArgumentOutOfRangeException($"Expected an index between 0 and 47, found {index}");
         }
     }
     private byte GetByteAtIndex(byte index)
@@ -620,6 +620,7 @@ public struct StringId : IFormattable, IComparable, IComparable<StringId>, IEqua
         return output;
     }
 
+
     public static bool operator ==(string left, StringId right)
     {
         if (left.Length != right.length)
@@ -634,19 +635,8 @@ public struct StringId : IFormattable, IComparable, IComparable<StringId>, IEqua
 
         return left.ToString() == right;
     }
-    public static bool operator ==(StringId left, StringId right)
-    {
-        if (left.length != right.length)
-            return false;
+    public static bool operator ==(StringId left, StringId right) => (left.length == right.length && left._0 == right._0 && left._1 == right._1 && left._2 == right._2 && left._3 == right._3 && left._4 == right._4 && left._5 == right._5 && left._6 == right._6 && left._7 == right._7 && left._8 == right._8 && left._9 == right._9 && left._10 == right._10 && left._11 == right._11 && left._12 == right._12 && left._13 == right._13 && left._14 == right._14 && left._15 == right._15 && left._16 == right._16 && left._17 == right._17 && left._18 == right._18 && left._19 == right._19 && left._20 == right._20 && left._21 == right._21 && left._22 == right._22 && left._23 == right._23 && left._24 == right._24 && left._25 == right._25 && left._26 == right._26 && left._27 == right._27 && left._28 == right._28 && left._29 == right._29 && left._30 == right._30 && left._31 == right._31 && left._32 == right._32 && left._33 == right._33 && left._34 == right._34 && left._35 == right._35 && left._36 == right._36 && left._37 == right._37 && left._38 == right._38 && left._39 == right._39 && left._40 == right._40 && left._41 == right._41 && left._42 == right._42 && left._43 == right._43 && left._44 == right._44 && left._45 == right._45 && left._46 == right._46 && left._47 == right._47);
 
-        for (byte i = 0; i < VALUE_SIZE; i++)
-        {
-            if (left.GetByteAtIndex(i) != right.GetByteAtIndex(i))
-                return false;
-        }
-
-        return true;
-    }
 
     public static bool operator !=(string left, StringId right)
     {
@@ -662,19 +652,7 @@ public struct StringId : IFormattable, IComparable, IComparable<StringId>, IEqua
 
         return left.ToString() != right;
     }
-    public static bool operator !=(StringId left, StringId right)
-    {
-        if (left.length != right.length)
-            return true;
-
-        for (byte i = 0; i < VALUE_SIZE; i++)
-        {
-            if (left.GetByteAtIndex(i) != right.GetByteAtIndex(i))
-                return true;
-        }
-
-        return false;
-    }
+    public static bool operator !=(StringId left, StringId right) => (left.length != right.length || left._0 != right._0 || left._1 != right._1 || left._2 != right._2 || left._3 != right._3 || left._4 != right._4 || left._5 != right._5 || left._6 != right._6 || left._7 != right._7 || left._8 != right._8 || left._9 != right._9 || left._10 != right._10 || left._11 != right._11 || left._12 != right._12 || left._13 != right._13 || left._14 != right._14 || left._15 != right._15 || left._16 != right._16 || left._17 != right._17 || left._18 != right._18 || left._19 != right._19 || left._20 != right._20 || left._21 != right._21 || left._22 != right._22 || left._23 != right._23 || left._24 != right._24 || left._25 != right._25 || left._26 != right._26 || left._27 != right._27 || left._28 != right._28 || left._29 != right._29 || left._30 != right._30 || left._31 != right._31 || left._32 != right._32 || left._33 != right._33 || left._34 != right._34 || left._35 != right._35 || left._36 != right._36 || left._37 != right._37 || left._38 != right._38 || left._39 != right._39 || left._40 != right._40 || left._41 != right._41 || left._42 != right._42 || left._43 != right._43 || left._44 != right._44 || left._45 != right._45 || left._46 != right._46 || left._47 != right._47);
 
 
     public static bool operator <(StringId left, StringId right) => left.CompareTo(right) < 0;

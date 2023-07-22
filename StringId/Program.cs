@@ -38,7 +38,7 @@ Console.WriteLine($"{also_a} -> {i_also_a}");
 Console.Write($"\n\n");
 
 {
-    int stressTest = 1;
+    int stressTest = 1_000_000;
 
     for (int _ = 0; _ < 10; _++)
     {
@@ -57,7 +57,7 @@ Console.Write($"\n\n");
 }
 
 {
-    int stressTest = 10_000;
+    int stressTest = 1_000_000;
 
     string all_chars = "_abcdefghijklmnopqrstuvwxyz0123456789-@/\\+.&*()[]=^%$#!`~|\";:<>?";
 
@@ -76,6 +76,50 @@ Console.Write($"\n\n");
         sw.Stop();
 
         Console.WriteLine($"Compared {stressTest} StringIds in ({sw.ElapsedMilliseconds}ms/{sw.ElapsedTicks}ticks)");
+    }
+}
+
+{
+    ulong stressTest = 1_000_000;
+
+    ulong[] ids = new ulong[stressTest];
+    for (ulong i = 0; i < stressTest; i++)
+        ids[i] = i;
+
+    for (int _ = 0; _ < 10; _++)
+    {
+        Stopwatch sw = Stopwatch.StartNew();
+        for (ulong i = 1; i < stressTest; i++)
+        {
+            if (ids[i] == ids[i - 1])
+                throw new InvalidDataException($"[{i - 1}; {ids[i - 1]}] == [{i}; {ids[i]}]");
+        }
+        sw.Stop();
+
+        Console.WriteLine($"Compared {stressTest} ulong in ({sw.ElapsedMilliseconds}ms/{sw.ElapsedTicks}ticks)");
+    }
+}
+
+{
+    int stressTest = 1_000_000;
+
+    string all_chars = "_abcdefghijklmnopqrstuvwxyz0123456789-@/\\+.&*()[]=^%$#!`~|\";:<>?";
+
+    string[] strings = new string[stressTest];
+    for (int i = 0; i < stressTest; i++)
+        strings[i] = all_chars.Substring(0, all_chars.Length - i.ToString().Length) + i.ToString();
+
+    for (int _ = 0; _ < 10; _++)
+    {
+        Stopwatch sw = Stopwatch.StartNew();
+        for (int i = 1; i < stressTest; i++)
+        {
+            if (strings[i] == strings[i - 1])
+                throw new InvalidDataException($"[{i - 1}; {strings[i - 1]}] == [{i}; {strings[i]}]");
+        }
+        sw.Stop();
+
+        Console.WriteLine($"Compared {stressTest} Strings in ({sw.ElapsedMilliseconds}ms/{sw.ElapsedTicks}ticks)");
     }
 }
 
