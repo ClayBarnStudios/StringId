@@ -1,5 +1,5 @@
 # StringId
-A 64 character deterministic ID struct.
+A 64 char string to deterministic ID `struct`.
 
 ```csharp
 var _a = "@my-type-name/subpath/unique";
@@ -11,7 +11,7 @@ var c = StringId.NewStringId(_c)
 Console.WriteLine($"{a} -> {_a} with Length: {_a.Length}");
 // Output: @my-type-name/subpath/unique -> @my-type-name/subpath/unique with Length: 28
 
-Console.WriteLine($"a == b? {b == a}");
+Console.WriteLine($"a == b? {a == b}");
 // Output: a == b? True
 
 Console.WriteLine($"a == c? {a == c}");
@@ -47,3 +47,35 @@ Console.WriteLine($"{a} -> {i_a}");
     seven hundred ten 
 */
 ```
+
+
+
+#### Current Benchmarks:
+
+
+
+##### Creation Benchmark
+
+***Includes:***
+- Call to `NewStringId()`
+- Substring Operation: `all_chars.Substring(0, all_chars.Length - i.ToString().Length) + i.ToString()` where `i` is the current index
+
+
+| Call Count | Result (Average of 10 attempts) |
+|------------|---------------------------------|
+| 10k        | 16.2ms                          |
+| 100k       | 163.4ms                         |
+| 1m         | 1513.9ms                        |
+
+
+
+##### Equality Benchmark
+
+***Includes:***
+- Only `if (stringIds[i] == stringIds[i - 1])`
+
+| Call Count + 1 | Result (Average of 10 attempts) |
+|----------------|---------------------------------|
+| 10k            | 3.6ms                           |
+| 100k           | 44.4ms                          |
+| 1m             | 390.3ms                         |
